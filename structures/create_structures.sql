@@ -1,7 +1,7 @@
-create user etl_perf identified by etl_perf;
-grant dba to etl_perf;
+CREATE USER etl_perf IDENTIFIED BY etl_perf TEMPORARY TABLESPACE TEMP DEFAULT TABLESPACE USERS;
+GRANT DBA TO etl_perf;
 
-conn etl_perf/etl_perf;
+CONN etl_perf/etl_perf;
 
 create table src_fact_tab as
 select batch_no, owner, table_name, column_name, data_type, BLOCKS, PARTITIONED
@@ -16,6 +16,7 @@ select rownum data_type_id, data_type, data_type_name
 where rownum < dt_cnt;
 
 alter table dim_data_type_tab add constraint dim_data_type_tab_pk primary key(data_type_id) using index;
+CREATE UNIQUE INDEX dim_data_type_tab_u1 ON  dim_data_type_tab (data_type);
 
 create table dim_owner_tab as
 select rownum owner_id, owner, owner_name
@@ -24,6 +25,7 @@ select rownum owner_id, owner, owner_name
 where rownum < own_cnt;
 
 alter table dim_owner_tab add constraint dim_owner_tab_pk primary key(owner_id) using index;
+CREATE UNIQUE INDEX dim_owner_tab_u1 ON  dim_owner_tab (owner);
 
 create sequence fact_id_seq;
 
