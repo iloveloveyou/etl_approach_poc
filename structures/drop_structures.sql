@@ -6,4 +6,6 @@ DROP TABLE fact_tab;
 DROP TABLE fact_tab_bad;
 DROP SEQUENCE fact_id_seq;
 DROP TABLE fact_tab_stage;
+
+CONN SYSTEM/oracle;
 DROP USER etl_perf CASCADE;
