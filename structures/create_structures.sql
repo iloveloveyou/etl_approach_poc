@@ -1,7 +1,7 @@
--- create user etl_perf identified by etl_perf;
--- grant dba to etl_perf;
---
--- conn etl_perf/etl_perf;
+create user etl_perf identified by etl_perf;
+grant dba to etl_perf;
+
+conn etl_perf/etl_perf;
 
 create table src_fact_tab as
 select batch_no, owner, table_name, column_name, data_type, BLOCKS, PARTITIONED
