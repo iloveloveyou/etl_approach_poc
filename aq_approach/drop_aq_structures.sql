@@ -88,6 +88,6 @@ DROP TYPE fact_common_type;
 DROP PACKAGE load_aq;
 
 
-CONN system/oracle;
-REVOKE EXECUTE ON DBMS_AQ FROM ETL_PERF;
+--CONN system/oracle;
+--REVOKE EXECUTE ON DBMS_AQ FROM ETL_PERF;
 

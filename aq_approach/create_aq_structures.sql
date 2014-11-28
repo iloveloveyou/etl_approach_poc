@@ -244,6 +244,7 @@ BEGIN
                       'etl_transform_subscriber',
                       NULL,
                       NULL )
+    ,queue_to_queue  => true
 --      ,
 --      delivery_mode => DBMS_AQ.BUFFERED
      );
