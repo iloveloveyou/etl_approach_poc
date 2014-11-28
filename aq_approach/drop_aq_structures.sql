@@ -1,15 +1,15 @@
 -- Inspired by
 -- http://www.oracle-developer.net/display.php?id=411
-EXEC DBMS_AQADM.UNSCHEDULE_PROPAGATION('etl_transform_queue');
-EXEC DBMS_AQADM.UNSCHEDULE_PROPAGATION('etl_load_fact_queue');
-EXEC DBMS_AQADM.UNSCHEDULE_PROPAGATION('etl_load_bad_queue');
+-- EXEC DBMS_AQADM.UNSCHEDULE_PROPAGATION('etl_transform_queue');
+-- EXEC DBMS_AQADM.UNSCHEDULE_PROPAGATION('etl_load_fact_queue');
+-- EXEC DBMS_AQADM.UNSCHEDULE_PROPAGATION('etl_load_bad_queue');
 BEGIN
   DBMS_AQ.UNREGISTER (
       SYS.AQ$_REG_INFO_LIST(
           SYS.AQ$_REG_INFO(
               'ETL_TRANSFORM_QUEUE:ETL_TRANSFORM_SUBSCRIBER',
               DBMS_AQ.NAMESPACE_AQ,
-              'plsql://ETL_PERF.LOAD_AQ.TRANSFORM',
+              'plsql://ETL_PERF.AQ_TRANSFORM',
               HEXTORAW('FF')
           )
       ),
@@ -21,7 +21,7 @@ BEGIN
           SYS.AQ$_REG_INFO(
               'ETL_LOAD_BAD_QUEUE:ETL_LOAD_BAD_SUBSCRIBER',
               DBMS_AQ.NAMESPACE_AQ,
-              'plsql://ETL_PERF.LOAD_AQ.LOAD_BAD',
+              'plsql://ETL_PERF.AQ_LOAD_BAD',
               HEXTORAW('FF')
           )
       ),
@@ -33,7 +33,7 @@ BEGIN
           SYS.AQ$_REG_INFO(
               'ETL_LOAD_FACT_QUEUE:ETL_LOAD_FACT_SUBSCRIBER',
               DBMS_AQ.NAMESPACE_AQ,
-              'plsql://ETL_PERF.LOAD_AQ.LOAD_FACT',
+              'plsql://ETL_PERF.AQ_LOAD_FACT',
               HEXTORAW('FF')
           )
       ),
@@ -87,5 +87,7 @@ DROP TYPE fact_common_type;
 
 DROP PACKAGE load_aq;
 
+
+CONN system/oracle;
 REVOKE EXECUTE ON DBMS_AQ FROM ETL_PERF;
 

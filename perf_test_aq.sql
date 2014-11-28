@@ -8,7 +8,7 @@ DECLARE
       COMMIT;
     END exec_code;
 BEGIN
-  exec_code('load_aq.read_source');
+  exec_code('aq_read_source');
 
   DBMS_OUTPUT.PUT_LINE('Total took:'||(systimestamp-total_t));
 END;

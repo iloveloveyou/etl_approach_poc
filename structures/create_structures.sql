@@ -1,9 +1,9 @@
-CONN system/oracle;
-
-CREATE USER etl_perf IDENTIFIED BY etl_perf TEMPORARY TABLESPACE TEMP DEFAULT TABLESPACE USERS;
-GRANT DBA TO etl_perf;
-
-CONN etl_perf/etl_perf;
+-- CONN system/oracle;
+--
+-- CREATE USER etl_perf IDENTIFIED BY etl_perf TEMPORARY TABLESPACE TEMP DEFAULT TABLESPACE USERS;
+-- GRANT DBA TO etl_perf;
+--
+-- CONN etl_perf/etl_perf;
 
 create table src_fact_tab as
 select batch_no, owner, table_name, column_name, data_type, BLOCKS, PARTITIONED
