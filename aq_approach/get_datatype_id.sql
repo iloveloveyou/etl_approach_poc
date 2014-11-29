@@ -1,0 +1,13 @@
+CREATE OR REPLACE FUNCTION get_data_type_id(p_data_type VARCHAR2) RETURN INTEGER RESULT_CACHE IS
+  result INTEGER;
+  BEGIN
+    SELECT d.DATA_TYPE_ID
+      INTO result
+      FROM DIM_DATA_TYPE_TAB d
+     WHERE d.DATA_TYPE = p_data_type;
+    RETURN result;
+  EXCEPTION
+    WHEN NO_DATA_FOUND THEN
+    RETURN NULL;
+  END;
+/
