@@ -10,7 +10,7 @@ select batch_no, owner, table_name, column_name, data_type, BLOCKS, PARTITIONED
   from dba_tab_columns c
   join dba_tables t using(owner, table_name)
   cross join (select rownum batch_no from dual connect by level <=100);
-  
+
 create table dim_data_type_tab as
 select rownum data_type_id, data_type, data_type_name
   from (select count(distinct data_type) over() dt_cnt, count(1) cnt,
