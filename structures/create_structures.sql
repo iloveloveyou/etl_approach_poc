@@ -1,5 +1,3 @@
--- CONN system/oracle;
---
 -- CREATE USER etl_perf IDENTIFIED BY etl_perf TEMPORARY TABLESPACE TEMP DEFAULT TABLESPACE USERS;
 -- GRANT DBA TO etl_perf;
 --
@@ -9,7 +7,8 @@ create table src_fact_tab as
 select batch_no, owner, table_name, column_name, data_type, BLOCKS, PARTITIONED
   from dba_tab_columns c
   join dba_tables t using(owner, table_name)
-  cross join (select rownum batch_no from dual connect by level <=100);
+  cross join (select rownum batch_no from dual connect by level <=100)
+ WHERE ROWNUM <= 3000000;
 
 create table dim_data_type_tab as
 select rownum data_type_id, data_type, data_type_name
